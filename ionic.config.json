@@ -1,0 +1,7 @@
+{
+  "name": "dana-kilat",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
