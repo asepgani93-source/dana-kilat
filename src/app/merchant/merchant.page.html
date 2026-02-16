@@ -1,0 +1,27 @@
+<ion-content>
+
+  <div style="padding:20px">
+
+    <h2>Merchant QR Generator</h2>
+
+    <ion-item>
+      <ion-label position="floating">Nama Merchant</ion-label>
+      <ion-input [(ngModel)]="merchantName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nominal Bayar</ion-label>
+      <ion-input type="number" [(ngModel)]="harga"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" (click)="generateQR()" style="margin-top:20px">
+      Generate QR
+    </ion-button>
+
+    <div *ngIf="qrData" style="margin-top:30px; text-align:center">
+      <qrcode [qrdata]="qrData" [width]="250"></qrcode>
+    </div>
+
+  </div>
+
+</ion-content>

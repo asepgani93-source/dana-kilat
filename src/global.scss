@@ -1,37 +1,83 @@
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
+ * Global styles for entire application
  */
 
-/* Core CSS required for Ionic components to work properly */
+/* Core CSS required for Ionic components */
 @import "@ionic/angular/css/core.css";
 
-/* Basic CSS for apps built with Ionic */
+/* Basic CSS */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
 
-/* Optional CSS utils that can be commented out */
+/* Optional Utilities */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
+/* Dark mode system */
+@import "@ionic/angular/css/palettes/dark.system.css";
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+
+/* ==========================================
+   SAFE AREA FIX (Agar tidak nabrak notch)
+========================================== */
+ion-content {
+  padding-top: env(safe-area-inset-top);
+}
+
+
+/* ==========================================
+   SCANNER MODE FIX (WAJIB untuk ML Kit)
+========================================== */
+body.barcode-scanner-active {
+  background: transparent !important;
+}
+
+body.barcode-scanner-active ion-content {
+  --background: transparent !important;
+  background: transparent !important;
+}
+
+
+/* ==========================================
+   SMOOTH UI (Optional Enhancement)
+========================================== */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+ion-button {
+  text-transform: none;
+}
+
+// Alert Button Styles
+.alert-button-cancel {
+  color: #6c757d !important;
+}
+
+.alert-button-confirm {
+  color: #1a73e8 !important;
+  font-weight: 600 !important;
+}
+
+// Toast Styles
+.custom-toast {
+  --border-radius: 12px;
+  font-weight: 500;
+}
+
+// Barcode Scanner Styles
+body.barcode-scanner-active {
+  visibility: visible;
+  
+  ion-app,
+  ion-content {
+    background: transparent !important;
+  }
+}

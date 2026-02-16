@@ -1,20 +1,171 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
     <ion-title>
-      Blank
+      <div class="header-wrapper">
+        <ion-icon name="wallet"></ion-icon>
+        <span>DanaKilat</span>
+      </div>
     </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="openNotifications()">
+        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+        <ion-badge color="danger" class="notification-badge">3</ion-badge>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <!-- BALANCE -->
+  <div class="content-wrapper">
+
+    <ion-card class="balance-card">
+      <ion-card-content>
+
+        <p class="balance-title">Total Saldo</p>
+
+        <div class="balance-amount-wrapper">
+          <h1 class="balance-amount" [class.blurred]="isSaldoHidden">
+            Rp {{ formatCurrency(saldo) }}
+          </h1>
+
+          <ion-button
+            fill="clear"
+            size="small"
+            (click)="toggleSaldoVisibility()"
+            class="toggle-balance-btn">
+
+            <ion-icon
+              slot="icon-only"
+              [name]="isSaldoHidden ? 'eye-off-outline' : 'eye-outline'">
+            </ion-icon>
+
+          </ion-button>
+        </div>
+
+        <div class="action-row">
+          <ion-button expand="block" (click)="isiSaldo()">
+            <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+            Top Up
+          </ion-button>
+
+          <ion-button expand="block" (click)="kirimUang()">
+            <ion-icon slot="start" name="paper-plane-outline"></ion-icon>
+            Kirim
+          </ion-button>
+
+          <ion-button expand="block" (click)="tarikSaldo()">
+            <ion-icon slot="start" name="card-outline"></ion-icon>
+            Tarik
+          </ion-button>
+        </div>
+
+      </ion-card-content>
+    </ion-card>
+
+    <!-- MENU -->
+    <div class="menu-section">
+      <h2 class="section-title">Layanan</h2>
+
+      <div class="menu-grid">
+        <div
+          class="menu-item"
+          *ngFor="let menu of menus"
+          (click)="onMenuClick(menu.label)">
+
+          <div class="menu-icon-wrapper">
+            <ion-icon [name]="menu.icon"></ion-icon>
+          </div>
+
+          <p class="menu-label">{{ menu.label }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROMO -->
+    <ion-card class="promo-card" (click)="openPromo()">
+      <ion-card-content>
+        <div class="promo-content">
+          <ion-icon name="gift-outline" class="promo-icon"></ion-icon>
+
+          <div class="promo-text">
+            <h3>Promo Spesial Hari Ini</h3>
+            <p>Cashback hingga Rp 50.000</p>
+          </div>
+
+          <ion-icon name="chevron-forward-outline" class="promo-arrow"></ion-icon>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- TRANSAKSI -->
+    <div class="transaction-section">
+
+      <div class="section-header">
+        <h2 class="section-title">Transaksi Terakhir</h2>
+
+        <ion-button
+          fill="clear"
+          size="small"
+          *ngIf="history.length > 0"
+          (click)="viewAllTransactions()">
+
+          Lihat Semua
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+
+        </ion-button>
+      </div>
+
+      <!-- LIST -->
+      <ion-card *ngIf="history.length > 0" class="transaction-card">
+        <ion-list lines="none">
+
+          <ion-item
+            *ngFor="let item of history"
+            button
+            (click)="viewTransactionDetail(item)">
+
+            <ion-icon
+              slot="start"
+              name="arrow-up-circle"
+              color="danger">
+            </ion-icon>
+
+            <ion-label>
+              <h3>{{ item.merchant }}</h3>
+              <p>{{ item.waktu }}</p>
+            </ion-label>
+
+            <ion-note slot="end" class="transaction-amount">
+              -Rp {{ formatCurrency(item.nominal) }}
+            </ion-note>
+
+          </ion-item>
+
+        </ion-list>
+      </ion-card>
+
+      <!-- EMPTY STATE -->
+      <div *ngIf="history.length === 0" class="empty-state">
+        <ion-icon name="receipt-outline"></ion-icon>
+        <h3>Belum Ada Transaksi</h3>
+        <p>Riwayat transaksi akan muncul di sini</p>
+      </div>
+
+    </div>
+
   </div>
+
+  <!-- Spacer lebih clean -->
+  <div class="bottom-spacer"></div>
+
 </ion-content>
+
+<!-- FAB SCAN -->
+<ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <ion-fab-button (click)="scanQR()">
+    <ion-icon name="scan-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

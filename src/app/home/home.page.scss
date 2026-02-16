@@ -1,27 +1,389 @@
-#container {
-  text-align: center;
+/* ===============================
+   VARIABLES
+================================= */
 
+$primary-color: #1a73e8;
+$danger-color: #dc3545;
+$text-dark: #1f1f1f;
+$text-muted: #6c757d;
+$card-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+
+/* ===============================
+   HEADER
+================================= */
+
+ion-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg, #1a73e8, #4285f4);
+    --color: #fff;
+
+    ion-title .header-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 20px;
+
+      ion-icon {
+        font-size: 24px;
+      }
+    }
+
+    ion-button {
+      --color: #fff;
+      position: relative;
+
+      ion-icon {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+.notification-badge {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 6px;
+  right: 6px;
+  font-size: 10px;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+/* ===============================
+   CONTENT
+================================= */
+
+ion-content {
+  --background: #f5f7fa;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.content-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px;
 }
 
-#container a {
-  text-decoration: none;
+/* ===============================
+   BALANCE CARD
+================================= */
+
+.balance-card {
+  border-radius: 18px;
+  box-shadow: $card-shadow;
+  margin-bottom: 20px;
+  background: linear-gradient(155deg, #667eea, #764ba2);
+
+  ion-card-content {
+    padding: 24px 20px;
+  }
+
+  .balance-title {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 8px;
+  }
+
+  .balance-amount-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .balance-amount {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+
+    &.blurred {
+      filter: blur(10px);
+      user-select: none;
+    }
+  }
+
+  .toggle-balance-btn {
+    --padding-start: 6px;
+    --padding-end: 6px;
+
+    ion-icon {
+      font-size: 20px;
+      color: #fff;
+    }
+  }
+
+  .action-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+
+    ion-button {
+      --border-radius: 12px;
+      --background: #fff;
+      --color: #{$primary-color};
+      font-weight: 600;
+      text-transform: none;
+      font-size: 12px;
+    }
+  }
+}
+
+/* ===============================
+   MENU
+================================= */
+
+.menu-section {
+  margin-bottom: 20px;
+
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: $text-dark;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+
+    .menu-icon-wrapper {
+      width: 60px;
+      height: 60px;
+      background: #fff;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: $card-shadow;
+      transition: transform 0.2s ease;
+
+      ion-icon {
+        font-size: 26px;
+        color: $primary-color;
+      }
+    }
+
+    &:active .menu-icon-wrapper {
+      transform: scale(0.92);
+    }
+
+    .menu-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: $text-dark;
+      margin: 0;
+      text-align: center;
+    }
+  }
+}
+
+/* ===============================
+   PROMO CARD
+================================= */
+
+.promo-card {
+  border-radius: 18px;
+  box-shadow: $card-shadow;
+  background: linear-gradient(135deg, #f093fb, #f5576c);
+  margin-bottom: 20px;
+  cursor: pointer;
+
+  ion-card-content {
+    padding: 16px;
+  }
+
+  .promo-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .promo-icon {
+      font-size: 30px;
+      color: #fff;
+    }
+
+    .promo-text {
+      flex: 1;
+
+      h3 {
+        font-size: 15px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 4px;
+      }
+
+      p {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.95);
+        margin: 0;
+      }
+    }
+
+    .promo-arrow {
+      font-size: 20px;
+      color: #fff;
+    }
+  }
+}
+
+/* ===============================
+   TRANSACTION
+================================= */
+
+.transaction-section {
+  margin-bottom: 20px;
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: $text-dark;
+    }
+
+    ion-button {
+      font-size: 13px;
+      text-transform: none;
+    }
+  }
+
+  .transaction-card {
+    border-radius: 16px;
+    box-shadow: $card-shadow;
+    margin: 0;
+
+    ion-item {
+      --min-height: 70px;
+      --padding-start: 16px;
+      --padding-end: 16px;
+
+      ion-icon[slot="start"] {
+        font-size: 28px;
+      }
+
+      ion-label h3 {
+        font-size: 15px;
+        font-weight: 600;
+        color: $text-dark;
+      }
+
+      ion-label p {
+        font-size: 13px;
+        color: $text-muted;
+      }
+
+      .transaction-amount {
+        font-weight: 700;
+        color: $danger-color;
+      }
+    }
+  }
+
+  .empty-state {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: $card-shadow;
+
+    ion-icon {
+      font-size: 56px;
+      color: #d0d5dd;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 14px;
+      color: $text-muted;
+      margin: 0;
+    }
+  }
+}
+
+/* ===============================
+   FAB SCAN
+================================= */
+
+ion-fab-button {
+  width: 64px;
+  height: 64px;
+  --background: linear-gradient(135deg, #1a73e8, #4285f4);
+  --box-shadow: 0 4px 16px rgba(26, 115, 232, 0.4);
+
+  ion-icon {
+    font-size: 30px;
+  }
+
+  &:active {
+    transform: scale(0.92);
+  }
+}
+
+/* ===============================
+   PAYMENT ALERT FIX
+================================= */
+
+.payment-alert {
+
+  .alert-wrapper {
+    border-radius: 20px;
+  }
+
+  .alert-message {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+
+  .payment-box {
+    padding: 10px 0;
+  }
+
+  .payment-label {
+    font-size: 13px;
+    color: #6c757d;
+    margin-bottom: 6px;
+  }
+
+  .payment-merchant {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #1f1f1f;
+  }
+
+  .payment-amount {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ion-color-primary);
+  }
+}
+
+
+/* ===============================
+   SPACER
+================================= */
+
+.bottom-spacer {
+  height: 100px;
 }
